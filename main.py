@@ -49,26 +49,26 @@ def calFreq_RDOF_DOC(clean_string, posList, DigLen):
 	for key in RDOFdic:
 		RDOF[key] = calDOF(RDOFdic[key])
 		if len(key) == 1:
-			DOC[key] = 0
+			DOC[key] = 1
 		elif len(key) == 2:
-			if key[0] not in freqDic:
-				DOC[key] = 0
-				continue
-			if key[1] not in freqDic:
-				DOC[key] = 0
-				continue
+			#if key[0] not in freqDic:
+			#	DOC[key] = 0
+			#	continue
+			#if key[1] not in freqDic:
+			#	DOC[key] = 0
+			#	continue
 			DOC[key] = freqDic[key]*length/freqDic[key[0]]/freqDic[key[1]]
 		elif DigLen > 2:
 			tmp = 1000000
 			for t in range(len(key)):
 				key1 = key[0:t+1]
 				key2 = key[t+1:]
-				if key1 not in freqDic:
-					DOC[key] = 0
-					continue
-				if key2 not in freqDic:
-					DOC[key] = 0
-					continue
+				#if key1 not in freqDic:
+				#	DOC[key] = 0
+				#	continue
+				#if key2 not in freqDic:
+				#	DOC[key] = 0
+				#	continue
 				tmp = min(tmp, freqDic[key]*length/freqDic[key1]/freqDic[key2])
 			DOC[key] = tmp
 	return freqDic, RDOF, DOC
@@ -100,11 +100,6 @@ def calLDOF(clean_string, posList, DigLen):
 	for key in LDOFdic:
 		LDOF[key] = calDOF(LDOFdic[key])
 	return LDOF
-
-def calDOC():
-
-    return
-
 
 
 def main(DigLen):
