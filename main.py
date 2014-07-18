@@ -10,7 +10,10 @@ import math
 I2C = ["" for i in range(25000)]
 
 def charactor2Int(charactor):
-        bys = charactor.encode('utf-8')
+        try:
+                bys = charactor.encode('GBK')
+        except:
+                return -1;
         if (len(bys) != 2): return -1;
         if (not((bys[0] > 129 and bys[0] < 255) and
                         (bys[1] > 63 and bys[1] < 255 ))): return -1
@@ -158,17 +161,21 @@ def main(DigLen):
 	#假定有5篇文本，命名一次为1.txt, 2.txt,...
 	filename = "gongchengche"
 	long_string = ""
-	for i in range(1):
-		f = open(filename, 'r', encoding = "utf-8")
-		for line in f:
-			#print (line)
-			#break
-			if line[-1] == "\n":
-				line = line[:-1]
-			long_string += line
-		f.close()
+	#for i in range(1):
+	#	f = open(filename, 'r', encoding = 'utf-8')
+	#	for line in f:
+	#		#print (line)
+	#		#break
+	#		if line[-1] == "\n":
+	#			line = line[:-1]
+	#		long_string += line
+	#	f.close()
+	f = open(filename, 'r', encoding = 'utf-8')
+	long_string = f.read()
+	f.close()
+	#print(long_string)
+	#long_string.decode('utf-8')
 	clean_string = WashTheTexts(long_string)
-	print(long_string)
 	#stringList = filter(long_string)
 
 	posList = findPos(clean_string, DigLen)
@@ -176,16 +183,14 @@ def main(DigLen):
 	r_clean_string = clean_string[::-1]
 	r_posList = findPos(r_clean_string, DigLen)
 	LDOF = calLDOF(r_clean_string, r_posList, DigLen)
-	print ("freqDic: ", freqDic)
-	print ("RDOF: ", RDOF)
-	print ("LDOF: ", LDOF)
-	print ("DOC: ", DOC)
-	"""for word in freqDic.keys():
-		if freqDic[word] > 2:
-			if min(RDOF[word], LDOF[word]) > 0.5:
-				if DOC[word] > 0.5:
-					print(word)"""
+	#print ("freqDic: ", freqDic)
+	#print ("RDOF: ", RDOF)
+	#print ("LDOF: ", LDOF)
+	#print ("DOC: ", DOC)
+	for word in freqDic.keys():
+                if freqDic(word) > 10:
+                        if min(RDOF[word], LDOF[word]) > 0.5:
+                                if DOC[word] > 0.5:
+                                        print(word)	
                                 
-	return 0
-
 main(5)
