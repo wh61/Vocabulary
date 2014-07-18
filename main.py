@@ -17,7 +17,7 @@ def calDOF(dic):
 	func = lambda x: -x/sumOfFreq*math.log(x/sumOfFreq)
 	return sum(list(map(func, freq)))
 
-def calFreqAndrightDOF(clean_string, posList, DigLen):
+def calFreq_RDOF_DOC(clean_string, posList, DigLen):
 	
 	freqDic = {}
 	RDOFdic = {}
@@ -73,7 +73,7 @@ def calFreqAndrightDOF(clean_string, posList, DigLen):
 			DOC[key] = tmp
 	return freqDic, RDOF, DOC
 
-def calLeftDOF(clean_string, posList, DigLen):
+def calLDOF(clean_string, posList, DigLen):
 	LDOFdic = {}
 	length = len(clean_string)
 	for m in range(1, DigLen+1):
@@ -123,10 +123,10 @@ def main(DigLen):
 	#stringList = filter(long_string)
 
 	posList = findPos(clean_string)
-	freqDic, RDOF, DOC = calFreqAndrightDOF(clean_string, posList, DigLen)
+	freqDic, RDOF, DOC = calFreq_RDOF_DOC(clean_string, posList, DigLen)
 	r_clean_string = clean_string[::-1]
 	r_postList = findPos(r_clean_string)
-	LDOF = calFreqAndrightDOF(r_clean_string, r_posList, DigLen)
+	LDOF = calLDOF(r_clean_string, r_posList, DigLen)
 
 	return 0
 
