@@ -13,7 +13,8 @@ I2C = ["" for i in range(25000)]
 
 def WashTheTexts_(fileName, int2charactor):
         arr = []
-        f1 = open(fileName, 'r', encoding = 'GBK')
+        f1 = open(f
+                  ileName, 'r', encoding = 'GBK')
         inputStr = f1.read()
         ResultStr = ""
         for ch in inputStr:

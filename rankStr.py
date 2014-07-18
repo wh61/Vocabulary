@@ -1,18 +1,18 @@
 def rankStr(texts, d):
     s = texts
     strLen = len(s)
-    for i in range(2 * (d + 1)): s += "一"
+    for i in range(2 * (d + 1)): s += "."
+    dic = {}
     for i in range(strLen):
-        Str = ""
-        for j in range(d + 1):
-            Str += s[i + j]
-        dic[Str] = i;
-    sorted(dic)
-    pos = [];
-    for key, val in dic:
-        pos.append(val)
+        Str = s [i : (i + d + 1)]
+        dic[Str] = i
+    keyList = sorted(dic)
+    print(keyList)
+    pos = []
+    for key in keyList:
+        pos.append(dic[key])
     return pos
-}
 
 
-    
+print(rankStr('四是四十是十十四是十四四十是四十', 5))
+
